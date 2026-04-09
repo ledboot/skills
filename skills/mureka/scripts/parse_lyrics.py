@@ -3,18 +3,12 @@
 Parse Mureka API response and generate .lrc lyrics files.
 
 Usage:
-    python parse_lyrics.py <task_id> <api_key>
     python parse_lyrics.py --response-json '<json_string>'
-    python parse_lyrics.py --response-file <file.json>
 """
 
 import json
 import sys
 import argparse
-import urllib.request
-from typing import Optional
-
-API_BASE = "https://api.mureka.ai"
 
 
 def format_timestamp(ms: int) -> str:
@@ -77,16 +71,6 @@ def generate_lrc(lyrics_sections: list, title: str = "", artist: str = "", album
     return "\n".join(lines)
 
 
-def fetch_task_result(task_id: str, api_key: str) -> dict:
-    """Fetch task result from Mureka API"""
-    url = f"{API_BASE}/v1/song/query/{task_id}"
-    req = urllib.request.Request(url)
-    req.add_header("Authorization", f"Bearer {api_key}")
-    
-    with urllib.request.urlopen(req) as response:
-        return json.loads(response.read().decode())
-
-
 def parse_api_response(response: dict, version_index: int = 0) -> str:
     """Parse API response and generate LRC for specified version"""
     choices = response.get("choices", [])
@@ -105,10 +89,8 @@ def parse_api_response(response: dict, version_index: int = 0) -> str:
 
 def main():
     parser = argparse.ArgumentParser(description="Parse Mureka API response to LRC format")
-    parser.add_argument("task_id", nargs="?", help="Task ID to fetch and parse")
-    parser.add_argument("api_key", nargs="?", help="Mureka API key")
+
     parser.add_argument("--response-json", help="Direct JSON response string")
-    parser.add_argument("--response-file", help="Path to JSON file with API response")
     parser.add_argument("--version", type=int, default=0, help="Version index (0-based, default: 0)")
     parser.add_argument("--output", "-o", help="Output .lrc file path")
     parser.add_argument("--title", help="Song title")
@@ -117,18 +99,11 @@ def main():
     
     args = parser.parse_args()
     
-    response = None
-    
-    if args.response_json:
-        response = json.loads(args.response_json)
-    elif args.response_file:
-        with open(args.response_file, "r") as f:
-            response = json.load(f)
-    elif args.task_id and args.api_key:
-        response = fetch_task_result(args.task_id, args.api_key)
-    else:
+    if not args.response_json:
         parser.print_help()
         sys.exit(1)
+    
+    response = json.loads(args.response_json)
     
     lrc_content = parse_api_response(response, args.version)
     
