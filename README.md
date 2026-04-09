@@ -10,7 +10,7 @@ This repository contains various skills that enhance AI assistants with speciali
 
 | Skill | Description |
 |-------|-------------|
-| [Mureka](skills/mureka/) | AI music generation and audio processing - song generation, lyrics, instrumentals, vocal cloning, TTS, podcast, stem separation |
+| [mureka](skills/mureka/) | AI music generation and audio processing - song generation, lyrics, instrumentals, vocal cloning, TTS, podcast, stem separation |
 
 ## Installation
 
