@@ -277,8 +277,8 @@ curl -X POST https://api.mureka.ai/v1/tts/generate \
 
 ## Model Versions
 
-- `auto`: Automatically select best model
-- `mureka-7.5`: Enhanced melody and arrangement, realistic vocals, supports streaming
-- `mureka-7.6`: Improved vocals and arrangement over 7.5
-- `mureka-o2`: Intelligent algorithm for superior quality, multilingual, contextual BGM
-- `mureka-8`: Latest model with highest quality output
+- `auto`
+- `mureka-7.5`
+- `mureka-o2`
+- `mureka-8`
+- `mureka-9` 
