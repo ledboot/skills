@@ -9,7 +9,7 @@ BearerAuth - Type: HTTP (bearer)
 
 ### Request Body (JSON)
 - `lyrics` (string, required): Song lyrics with section markers
-- `model` (string, optional): Model version - "auto", "mureka-7.5", "mureka-7.6", "mureka-o2", "mureka-8"
+- `model` (string, optional): Model version - auto, mureka-7.6, mureka-o2, mureka-8, mureka-9
 - `prompt` (string, optional): Musical style description
 - `n` (integer, optional): Defaults to 2, maximum 3. How many songs to generate for each request. Note that you will be charged based on the number of songs.
 - `reference_id` (string, optional): Control music generation by referencing music, generated through the files/upload API (for reference purpose). Besides individual control, it also supports combination with other options: reference_id + vocal_id.
