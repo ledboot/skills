@@ -171,17 +171,10 @@ curl https://api.mureka.ai/v1/song/query/435134 \
 Use the bundled script to parse API response and generate .lrc lyrics files:
 
 ```bash
-# Fetch and parse from API
-python scripts/parse_lyrics.py <task_id> <api_key>
 
 # Parse from JSON file
-python scripts/parse_lyrics.py --response-file response.json
+python scripts/parse_lyrics.py --response-json '<json>' --version 0 --output song.lrc --title "My Song" --artist "Artist"
 
-# Parse from JSON string
-python scripts/parse_lyrics.py --response-json '<json>'
-
-# With options
-python scripts/parse_lyrics.py <task_id> <api_key> --version 0 --output song.lrc --title "My Song" --artist "Artist"
 ```
 
 **LRC format**:
